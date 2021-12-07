@@ -1,0 +1,55 @@
+@import "src/colors.scss";
+
+.Formulario {
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-start;
+}
+
+.vaciar {
+    background-color: $danger;
+}
+
+.vaciar:hover {
+    background-color: $dangerDark;
+}
+
+.nuevo {
+    background-color: #469553;
+}
+
+.nuevo:hover {
+    background-color: #336e3d;
+}
+
+.vaciar, .nuevo {
+    margin-left: 4px;
+    margin-right: 4px;
+    
+    font-size: 16px;
+    font-weight: 500;
+    border-radius: 2px;
+
+    color: #EAEAE9;
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+.elemento{
+    min-width: 200px;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.errorText{
+    color:$danger;
+    display: block;
+}
+.inputContainer{
+    padding:0 9px;
+    text-align: left;
+}
+.errorInput input{
+    border: 1px solid $danger;
+}

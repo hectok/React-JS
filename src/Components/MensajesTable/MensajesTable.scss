@@ -1,0 +1,52 @@
+@import "src/colors.scss";
+
+.mensajesTable {
+    width: 100%;
+    font-family: arial, sans-serif;
+    border-collapse: collapse;
+    margin-top: 32px;
+}
+
+  
+td, th {
+    border: 1px solid #dddddd;
+    text-align: left;
+    padding: 8px;
+}
+
+.header {
+    background-color: #dddddd;
+}
+.borrar {
+    margin-left: 4px;
+    margin-right: 4px;
+    
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 2px;
+
+    color: #EAEAE9;
+}
+
+.borrar {
+    background-color: #f44336;
+}
+
+.borrar:hover {
+    background-color: #ce392f;
+}
+.leido {
+    background-color: #d69732;
+}
+
+.leido:hover {
+    background-color: #b8822b;
+}
+
+.elementoLeido {
+    background-color: #92e6ff;
+}
+
+.elementoNOLeido {
+    background-color: #ffffff;
+}
