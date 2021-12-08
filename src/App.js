@@ -16,7 +16,7 @@ function App() {
       <Router>
         <Nav />
         <div>
-          <Route exact path="/login" component={Login} />
+          <Route exact path={["/login","/"]} component={Login} />
           <Route exact path="/singin" component={Signin} />
           <ProtectedRoute exact path="/store" component={Store} />
           <ProtectedRoute exact path="/about" component={About} />

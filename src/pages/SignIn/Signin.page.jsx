@@ -12,6 +12,7 @@ export default function Login(props) {
     const validaciones = Yup.object().shape({
         usuario: Yup.string()
             .required('Por favor, escribe tu usuario.')
+            .email('El email es incorrecto')
             .min(3, 'Mínimos 3 carácteres.'),
         password: Yup.string()
             .required('Por favor, escribe una contraseña')
@@ -23,7 +24,8 @@ export default function Login(props) {
     let initialValues = { usuario: '', password: '' };
 
     let createUser = () => {
-        return <Redirect to="/login" />;
+        let path = `login`; 
+        history.push(path);
     }
 
     let signIn = (event) => {
@@ -49,7 +51,7 @@ export default function Login(props) {
                     <strong className="titleForm">Iniciar sesión</strong>
 
                     <div className={[touched.usuario && errors.usuario && "errorInput", "inputContainer"].join(' ')}>
-                        <Field className="elemento" placeholder="Introduce tu usuario..." name="usuario" value={values.usuario} />
+                        <Field className="elemento" placeholder="Introduce tu email..." name="usuario" value={values.usuario} />
                         {touched.usuario && errors.usuario && <div className="errorText">{errors.usuario}</div>}
                     </div>
                     <div className={[touched.password && errors.password && "errorInput", "inputContainer"].join(' ')}>
