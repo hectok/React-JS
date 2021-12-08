@@ -10,7 +10,6 @@ export const sesion = (state = initialState.sesion, action) => {
             state = true;
             return state;
         case SESION_MENSAJES.CERRAR:
-            
             state = false;
             return state;
         default:
