@@ -23,6 +23,7 @@ function App() {
           <ProtectedRoute path="/product/:id" component={Product} />
         </div>
       </Router>
+      
     </div>
   );
 }

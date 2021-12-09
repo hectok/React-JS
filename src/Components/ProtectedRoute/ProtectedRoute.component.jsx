@@ -8,7 +8,6 @@ export const ProtectedRoute = ({ component: Component, ...rest }) => {
         <Route
             {...rest}
             render={ props => {
-                console.log(sesion);
                 if(sesion) {
                     return <Component {...props} />;
                 } else {

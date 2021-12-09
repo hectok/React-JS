@@ -1,10 +1,11 @@
 import { createStore, combineReducers } from 'redux';
 import { mensajes } from './reducers/mensajes';
 import { sesion } from './reducers/sesion';
-
+import { productos } from './reducers/productos';
 let reducers = combineReducers({
     mensajes: mensajes,
-    sesion: sesion
+    sesion: sesion,
+    productos: productos
 });
 
 let store = createStore(
