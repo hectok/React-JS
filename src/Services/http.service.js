@@ -52,3 +52,10 @@ const DELETE = (url) => {
       .then(response => `${response.status} ${response.statusText}`);
 }
 export { DELETE };
+
+const fetchProducts = async () => {
+    let response = await fetch('https://fakestoreapi.com/products');
+  
+    return response.json();
+}
+export { fetchProducts }

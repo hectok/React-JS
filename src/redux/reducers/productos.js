@@ -10,14 +10,12 @@ export const productos = (state = initialState.productos, action) => {
             return [];
         case ACTIONS_PRODUCTOS.CREAR:
             state.push(action.payload);
-
-            return [...state];
+            return state;
         case ACTIONS_PRODUCTOS.LEER:
-            state[action.payload].leido = !state[action.payload].leido;
-
-            return [...state];
+            state = action.payload;
+            return state;
         default:
-            return [...state];
+            return state;
     }
 }
 

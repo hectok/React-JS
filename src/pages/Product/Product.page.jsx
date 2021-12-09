@@ -2,13 +2,16 @@ import { useParams } from 'react-router-dom';
 import './Product.page.scss';
 
 export default function Product(props) {
-  let { id, vistoEnStore, enOferta } = props.history.location.state;
+  let { title, image, price, category } = props.history.location.state;
 
   return (
     <div className="Product">
-      <div><strong>Aquí irán los datos del producto:</strong> {id}</div>
-      <div><strong>Visto en la tienda:</strong> {(vistoEnStore) ? 'SI' : 'NO'}</div>
-      <div><strong>En oferta:</strong> {(enOferta) ? 'SI' : 'NO'}</div>
+      <img className="Product-image" src={image} alt={title}/>
+      <div className="Product-container">
+        <div className="Product-title">{title}</div>
+        <div className="Product-price">{price}</div>
+        <div className="Product-category">{category}</div>
+      </div>
     </div>
   );
 }

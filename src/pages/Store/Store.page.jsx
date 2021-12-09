@@ -1,29 +1,41 @@
 import './Store.page.scss';
-import React, { useEffect } from 'react';
+import React, { useEffect, useCallback } from 'react';
 
 import { useHistory } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
-
+import { fetchProducts } from '../../Services/http.service';
+import { leerProducto } from '../../redux/actions/productos';
 export default function Store() {
     const history = useHistory();
-    const products = useSelector(state => state.products);
+    const productos = useSelector(state => state).productos;
     const dispatch = useDispatch();
 
-    useEffect(() => {
-        if(!products){
+    const getProducts = useCallback(() => {
+        if( !productos.length ){
             fetchProducts()
-        }
-    }, []);
+            .then( (data) => {
+              dispatch( leerProducto(data) );
+            })
+            .catch( (error) => {
+              console.trace('Error:',error)
+            })
+        };
+      }, [productos,dispatch]);
+    
+      useEffect(() => {
+        getProducts();
+      }, [getProducts]);
 
-    let abrirProducto = (index) => {
-
+    let abrirProducto = (product) => {
         // Nos devuelve un producto con ID entre 1 y 20 (Ambos incluidos).
         history.push({
-            pathname: '/product/' +index,
+            pathname: '/product/' +product.id,
             state: {
-                id: index,
-                vistoEnStore: true,
-                enOferta: false
+                id: product.id,
+                title: product.title,
+                image: product.image,
+                price: product.price,
+                category: product.category
             }
         })
     }
@@ -33,14 +45,11 @@ export default function Store() {
             <h1>Bienvenido a mi tienda</h1>
             <div className="wrapper">
                 <h1>Lista de productos</h1>
-                <ul>
-                    {products && products.map(product => (
-                        <li key={product.id}>
+                <ul className="productList">
+                    {productos && productos.map(product => (
+                        <li className="productElement" key={product.id} onClick={() => abrirProducto(product)}>
+                            <img src={product.image}/>
                             <h3>{product.title}</h3>
-                            <div>
-                                Image: {product.image}
-                            </div>
-                            <button onClick={abrirProducto(product.id)}>Ir al producto</button>
                         </li>
                     ))}
                 </ul>
