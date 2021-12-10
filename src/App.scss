@@ -1,11 +1,23 @@
 .App {
   padding: 12px 36px;
   box-sizing: border-box;
- 
-  background-color:  #282c34;  /* #282c34 */
   color: white;
+  min-height: 100vh;
 }
-
+.App.darkBackground{
+  background-color:  #282c34;  /* #282c34 */
+  transition: all .5s;
+  .darkMode{
+    color: #fff!important;
+  }
+}
+.App.lightBackground{
+  background-color: beige;
+  transition: all .5s;
+  .lightMode{
+    color: #000!important;
+  }
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

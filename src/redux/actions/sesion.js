@@ -12,7 +12,15 @@ export const cerrarSesion = (msg) => {
     }
 }
 
+export const getSession = (index) => {
+    return {
+        type: SESION_MENSAJES.LEER,
+        payload: index
+    }
+}
+
 export const SESION_MENSAJES = {
     INICIAR: "INICIAR_SESION",
     CERRAR: "CERRAR_SESION",
+    LEER: "LEER_SESION"
 }

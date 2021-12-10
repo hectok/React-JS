@@ -1,20 +1,8 @@
-import { SESION_MENSAJES } from '../actions/sesion';
+import React from 'react';
 
-const initialState = {
-    sesion: false
-};
+const SessionContext = React.createContext({
+    session: true,
+    setSession: () => {}
+});
 
-export const sesion = (state = initialState.sesion, action) => {
-    switch (action.type) {
-        case SESION_MENSAJES.INICIAR:
-            state = true;
-            return state;
-        case SESION_MENSAJES.CERRAR:
-            state = false;
-            return state;
-        default:
-            return state;
-    }
-}
-
-export default sesion;
+export default SessionContext;

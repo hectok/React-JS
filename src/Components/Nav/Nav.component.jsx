@@ -1,23 +1,31 @@
 import './Nav.component.scss';
-import { Link } from 'react-router-dom';
-import { useSelector, useDispatch } from 'react-redux';
-import { cerrarSesion } from '../../redux/actions/sesion';
-import  { useHistory  } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import { useContext } from 'react';
+import { useSelector } from 'react-redux';
+import SessionContext from '../../redux/reducers/sesion';
+import Bootstrap from '../Bootstrap/Bootstrap.component';
 
 export default function Nav() {
-  const sesion = useSelector(state => state).sesion;
-  const dispatch = useDispatch();
+  const { session, setSession } = useContext(SessionContext);
+  const styleMode = useSelector(state => state).styleMode;
   const history = useHistory();
   let cerrar = () => {
-    dispatch(cerrarSesion());
-    let path = `login`; 
+    setSession(false);
+    let path = `login`;
     history.push(path);
   }
   return (
-    <div className="Nav">
-        <Link className="Nav-link" to='/store'>Store</Link>
-        <Link className="Nav-link" to='/about'>About</Link>
-        {sesion && <button onClick={cerrar}>Cerrar sesión</button>}
-    </div>
+    <nav className={["navbar navbar-expand-lg bg-lightsticky-top", styleMode ? 'navbar-dark bg-dark' : 'navbar-light bg-light'].join(' ')}>
+      <div className="container-fluid">
+        <ul className="navbar-nav mr-auto">
+          <li className="nav-item"><Link className="nav-link" to='/store'>Store</Link></li>
+          <li className="nav-item"><Link className="nav-link" to='/about'>About</Link></li>
+        </ul>
+        <div>
+          <Bootstrap/>
+          {session && <button className="btn btn-sm btn-outline-secondary" onClick={cerrar}>Cerrar Sesión</button>}
+        </div>
+      </div>
+    </nav>
   );
 }

@@ -1,10 +1,12 @@
 import './Login.page.scss'
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { iniciarSesion } from '../../redux/actions/sesion.js';
 import { Formik, Form, Field } from 'formik';
 import * as Yup from 'yup';
-import  { useHistory  } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
+import { useContext } from 'react';
+import SessionContext from '../../redux/reducers/sesion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faUserCircle, faUser } from '@fortawesome/free-solid-svg-icons'
 
 export default function Login(props) {
 
@@ -18,26 +20,25 @@ export default function Login(props) {
             .min(5, 'Mínimos 5 carácteres.'),
 
     });
-    const dispatch = useDispatch();
+    const { setSession } = useContext(SessionContext);
     const history = useHistory();
     let userAlreadyExist = false;
     let initialValues = { usuario: '', password: '' };
-
     let createUser = () => {
-        let path = `singin`; 
+        let path = `singin`;
         history.push(path);
     }
 
     let login = (event) => {
-        let retrievedObject = localStorage.getItem('usuario_'+event.usuario);
-        if(retrievedObject){
+        let retrievedObject = localStorage.getItem('usuario_' + event.usuario);
+        if (retrievedObject) {
             userAlreadyExist = true;
-        }else{
+        } else {
             if (event.usuario && event.password) {
                 let localStorageUser = { usuario: event.usuario, password: event.password }
-                localStorage.setItem("usuario_"+event.usuario, JSON.stringify(localStorageUser));
-                dispatch(iniciarSesion({}));
-                let path = `store`; 
+                localStorage.setItem("usuario_" + event.usuario, JSON.stringify(localStorageUser));
+                setSession(true);
+                let path = `store`;
                 history.push(path);
             }
         }
@@ -45,28 +46,41 @@ export default function Login(props) {
 
     return (
         <>
-        <Formik
-            validationSchema={validaciones}
-            initialValues={initialValues}
-            onSubmit={login}>
-            {({ values, touched, errors }) => (
-                <Form className="formulario-logIn">
-                    <strong className="titleForm">Crea tu usuario</strong>
+            <div className="form-bg">
+                <div className="container">
+                    <div className="row justify-content-md-center">
+                        <div className="col-md-offset-4 col-md-4 col-sm-offset-3 col-sm-6">
+                            <div className="form-container">
+                                <h3 className="title">Crea tu usuario</h3>
+                                <Formik
+                                    validationSchema={validaciones}
+                                    initialValues={initialValues}
+                                    onSubmit={login}>
+                                    {({ values, touched, errors }) => (
+                                        <Form className="form-horizontal">
+                                            <div className="form-icon">
+                                                <FontAwesomeIcon icon={faUserCircle} />
+                                            </div>
+                                            <div className={[touched.usuario && errors.usuario && "errorInput", "form-group"].join(' ')}>
+                                            <FontAwesomeIcon icon={faUser} />
+                                                <Field className="form-control" placeholder="Introduce tu email..." name="usuario" value={values.usuario} />
+                                            </div>
+                                            <div className={[touched.password && errors.password && "errorInput", "form-group"].join(' ')}>
 
-                    <div className={[touched.usuario && errors.usuario && "errorInput", "inputContainer"].join(' ')}>
-                        <Field className="elemento" placeholder="Introduce tu email..." name="usuario" value={values.usuario} />
-                        {touched.usuario && errors.usuario && <div className="errorText">{errors.usuario}</div>}
+                                                <Field className="form-control" placeholder="Introduce tu password..." name="password" value={values.password} />
+                                                <span className="forgot" onClick={createUser}>Iniciar sesión</span>
+
+                                            </div>
+                                            <button type="submit" className="btn signin">Crear usuario</button>
+                                        </Form>
+                                    )}
+                                </Formik>
+                            </div>
+                        </div>
                     </div>
-                    <div className={[touched.password && errors.password && "errorInput", "inputContainer"].join(' ')}>
-                        <Field className="elemento" placeholder="Introduce tu password..." name="password" value={values.password} />
-                        {touched.password && errors.password && <div className="errorText">{errors.password}</div>}
-                    </div>
-                    <button className="nuevo">Crear un usuario</button>
-                    <button type="button" className="iniciarSesion" onClick={createUser}>¿Ya estás registrado? Iniciar sesión</button>
-                </Form>
-            )}
-        </Formik>
-        {userAlreadyExist && <div>Lo sentimos, ese usuario ya está cogido</div>}
+                </div>
+            </div>
         </>
+
     );
 }

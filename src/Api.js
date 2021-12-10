@@ -1,4 +1,4 @@
-const API_BASE_ADDRESS = 'https://fakestoreapi.com/';
+const API_BASE_ADDRESS = 'https://fakestoreapi.com';
 
 export default class Api {
     static getProducts() {

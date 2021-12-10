@@ -1,28 +1,53 @@
-.Product{
-    width: 300px;
-    background-color: aliceblue;
+.container{
+    margin-top: 50px;
 }
-.Product-image{
-    width: 300px;
-    height: 300px;
-    font-size: 13px;
+.container.darkMode .card{
+    background-color: #282c34;
+    color: #fff;
+    transition: all .5s;
+}
+.container.lightMode .card{
+    background-color: #fff;
     color: #000;
+    transition: all .5s;
 }
-.Product-title{
-    color: #000;
-    margin-bottom: 5px;
-}
-.Product-price{
-    font-size: 15px;
-    margin-bottom: 5px;
-    font-weight: bold;
-    color: #000;
-    text-align: right;
-}
-.Product-category{
-    color: #000;
-    margin-bottom: 5px;
-}
-.Product-container{
+.card {
+    background-color: #fff;
+    color:#000;
     padding: 10px;
+    border: none;
+    min-height: 400px;
+    position: relative;
+    transition: all .5s;
+    cursor: pointer
+}
+.product-image{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+.product-image img {
+    width: 200px;
+    height: 200px;
+    transition: all 0.5s
+}
+
+.card:hover .product-image img {
+    transform: rotate(10deg)
+}
+
+.button {
+    width: 200px;
+    height: 48px;
+    border: none;
+    border-radius: 30px;
+    background-color: #126ef9;
+    color: #fff;
+    margin:20px 0;
+}
+
+.button i {
+    margin-top: 1px
 }

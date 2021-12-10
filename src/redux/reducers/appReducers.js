@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
 import { mensajes } from './mensajes';
-import { sesion } from './sesion';
+import { styleMode } from './styleMode';
 import { default as productos } from './productos';
 const  reducers = combineReducers({
     mensajes,
-    sesion,
+    styleMode,
     productos
 });
 export default reducers;

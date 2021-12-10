@@ -1,14 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Route, Redirect } from "react-router-dom";
-import { useSelector } from 'react-redux';
+import SessionContext from '../../redux/reducers/sesion';
 
 export const ProtectedRoute = ({ component: Component, ...rest }) => {
-    const sesion = useSelector(state => state).sesion;
+    const { session } = useContext(SessionContext);
     return (
         <Route
             {...rest}
             render={ props => {
-                if(sesion) {
+                if(session) {
                     return <Component {...props} />;
                 } else {
                     return <Redirect to='/login' />;
