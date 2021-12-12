@@ -22,7 +22,6 @@ export default function Login(props) {
     });
     const { setSession } = useContext(SessionContext);
     const history = useHistory();
-    let userAlreadyExist = false;
     let initialValues = { usuario: '', password: '' };
     let createUser = () => {
         let path = `singin`;
@@ -31,9 +30,7 @@ export default function Login(props) {
 
     let login = (event) => {
         let retrievedObject = localStorage.getItem('usuario_' + event.usuario);
-        if (retrievedObject) {
-            userAlreadyExist = true;
-        } else {
+        if (!retrievedObject) {
             if (event.usuario && event.password) {
                 let localStorageUser = { usuario: event.usuario, password: event.password }
                 localStorage.setItem("usuario_" + event.usuario, JSON.stringify(localStorageUser));

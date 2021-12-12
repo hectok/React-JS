@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState} from 'react';
 import { useSelector } from 'react-redux';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import About from './pages/About/About.page';
@@ -16,7 +16,6 @@ export default function App() {
   const styleMode = useSelector(state => state).styleMode;
   return (
     <SessionContext.Provider value={{session,setSession}}>
-      <strong>{process.env.REACT_APP_ENV}</strong>
       <div className={["App",styleMode ? 'darkBackground' : 'lightBackground'].join(' ')}>
         <Router>
           {session && <Nav />}
