@@ -1,7 +1,8 @@
 import './Product.page.scss';
 import { useSelector } from 'react-redux';
+import { memo } from 'react';
 
-export default function Product(props) {
+function Product(props) {
   let { title, image, price, category, description } = props.history.location.state;
   const styleMode = useSelector(state => state).styleMode;
 
@@ -26,4 +27,5 @@ export default function Product(props) {
         </div>
       </div>
   );
-}
+};
+export default memo(Product);

@@ -3,6 +3,7 @@ import * as React from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router-dom'
 import { loadProducts } from '../../redux/actions/productos';
+import { memo } from 'react';
 
 export const Component = withRouter(({ history, location }) => { })
 class Store extends React.Component {
@@ -83,4 +84,4 @@ const mapDispatchToProps = {
 export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Store);
+)(memo(Store));

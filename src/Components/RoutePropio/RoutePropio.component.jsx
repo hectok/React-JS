@@ -9,7 +9,6 @@ export const RoutePropio = ({ path, children }) => {
     useEffect(() => {
         // Función que modificará el estado
         const onLocationChange = () => {
-            console.log('La propiedad location ha cambiado');
             setCurrentPath(window.location.pathname);
         }
 
